@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "parse-liip": "nodemon -e js -w ./ ./bin/parseLiipArticle.js",
+    "parse-text": "cat data/phd2009.Acknowledgements.txt | bin/parseText.js > data/phd2009.acknowledgements.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
