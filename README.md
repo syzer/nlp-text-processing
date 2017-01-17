@@ -3,10 +3,17 @@
 nlp-processing sketchbook
 
 
-# HOW
+# Install
 
 ```
 npm i
+```
+
+# Parsing Liip article
+```
+bin/parseLiipArticle.js
+#or
+npm run parse-liip
 ```
 
 

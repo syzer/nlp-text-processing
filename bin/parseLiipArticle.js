@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const R = require('ramda')
 const { map, filter, none, split, isEmpty, join, trim, replace } = R
 const { readFile, writeFile } = require('../lib')
