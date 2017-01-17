@@ -1,0 +1,19 @@
+{
+  "name": "nlp-text-processing",
+  "version": "1.0.0",
+  "description": "sketchbook for natural language processing",
+  "main": "index.js",
+  "scripts": {
+    "parse-liip": "nodemon -e js -w ./ ./bin/parseLiipArticle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "data.task": "^3.1.1",
+    "natural": "^0.4.0",
+    "node-rake": "0.0.7",
+    "object-stream-tools": "^2.3.0",
+    "ramda": "^0.23.0"
+  }
+}
