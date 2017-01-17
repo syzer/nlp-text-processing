@@ -1,16 +1,7 @@
-const Task = require('data.task')
-const fs = require('fs')
+#!/usr/bin/env node
+
+const { readFile, writeFile } = require('../lib')
 const dataDir = __dirname + '/../data/'
-
-const readFile = filename =>
-    new Task((rej, res) =>
-        fs.readFile(filename, 'utf-8', (err, contents) =>
-            err ? rej(err) : res(contents)))
-
-const writeFile = (filename, contents) =>
-    new Task((rej, res) =>
-        fs.writeFile(filename, contents, (err, success) =>
-            err ? rej(err) : res(success)))
 
 const app =
     readFile(dataDir + 'english-stop-words.txt')
