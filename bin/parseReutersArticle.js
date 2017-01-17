@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { readFile, writeFile } = require('../lib')
+const { readFile, writeFile } = require('function-file-tools')
 const dataDir = __dirname + '/../data/'
 
 const app =

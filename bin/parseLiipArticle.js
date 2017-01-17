@@ -2,7 +2,8 @@
 
 const R = require('ramda')
 const { map, filter, none, split, isEmpty, join, trim, replace } = R
-const { readFile, writeFile } = require('../lib')
+const { readFile, writeFile } = require('function-file-tools')
+
 const dataDir = __dirname + '/../data/'
 
 const parseFile = R.pipe(

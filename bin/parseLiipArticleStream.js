@@ -4,7 +4,7 @@ const fs = require('fs')
 const R = require('ramda')
 const { map: ostMap } = require('object-stream-tools')
 const { map, filter, none, split, isEmpty, join, trim, replace } = R
-const { readFile, writeFile, readFileStream } = require('../lib')
+const { readFile, writeFile, readFileStream } = require('function-file-tools')
 const dataDir = __dirname + '/../data/'
 
 const parseFile = R.pipe(
