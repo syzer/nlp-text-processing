@@ -82,7 +82,7 @@ const tagAsync = (lexicon, rule, category) =>
     })
 
 tagAsync(lexicon, rule, category)
-    .then(tag => console.log(tag.tag(exKudos)))
+// .then(tag => console.log(tag.tag(exKudos)))
     .catch(console.error)
 
 // VBN - verb
@@ -107,3 +107,34 @@ tagAsync(lexicon, rule, category)
 // [ 'foodways', 'N' ],
 // [ 'offer!', 'N' ] ]
 
+const train = [
+    {
+        label: 'spam',
+        text: 'We are currently verifying our subscribers email accounts in other to increase the efficiency of our webmail futures. During this course you are required to provide the verification desk with the following details so that your account could be verified;'
+    },
+    {
+        label: 'spam',
+        text: 'After the last annual calculations of your account activity we have determined that you are eligible to receive a tax refund of $479.30 .Please submit the tax refund request and allow us 2-6 days in order toprocess it.'
+    },
+    {
+        label: 'inbox',
+        text: '-tagger is trained on the Parole corpus, so the rules it uses to compute word classes for new words or homographs reflect the composition and usage in the Parole corpus (see report below). Under optimal circumstances the tagger attains 97% correct POS-tagging. '
+    }
+]
+
+const test = [
+    { label: 'spam', text: 'refund are requested' },
+    { label: 'inbox', text: 'compute support vector machine' }
+]
+
+const bayes = new n.BayesClassifier
+
+train.map(({ text, label }) =>
+    bayes.addDocument(text, label))
+
+bayes.train()
+
+test.map(({ text }) => bayes.classify(text))
+
+// spam 0 [ 'spam', 'inbox' ]
+// inbox 1 [ 'spam', 'inbox' ]
