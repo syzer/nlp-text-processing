@@ -13,7 +13,8 @@ const articles = [
     ...exampleScrapedArticle,
     ...liipArticle,
     // ...acknowledgements
-    acknowledgements[0].slice(0, 3990)
+    acknowledgements[0].slice(0, 3990),
+    `Thank you to @jeanmonod and @isaline for their recent work on the website. BePark.eu took a look at our website few months ago and they didn't find any information about what we do (especially Xamarin tech for mobile). So we were *not a choice* for them. Recently, a friend that works at BePark.eu contacted me with an offer for us. What has changed? The website has been updated and now they've found the information they needed. So all the recent efforts are paying! Congrats.`
 ]
 
 const app = articles
@@ -27,8 +28,8 @@ const app = articles
 // 'attend Kazakhstan peace talks Iran sticks | Chinese Foreign Ministry spokeswoman Hua Chunying | Taiwan President Tsai Ingwen angering Beijing'
 // 'site building user experience security content authoring | development documentation marketing events organization supports… | Drupal Mentors DrupalCon Dublin 2016]
 //  'student Craig Nevill Manning | Ukrainian German exchange student | Acknowledgements Ian Witten deserves' ]
-
 // or
 // 'Michael Poprat Alberto Pepe  Andras Csomai | Anna Huang  Craig Schock | Dmitry Lizorkin  Alan Aronson'
 
+// 'recent work | months ago | Xamarin tech'
 console.log(app)
