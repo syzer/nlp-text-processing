@@ -36,6 +36,12 @@ npm run parse-liip
 bin/parseEnglishStopWords.js 
 ```
 
+# python installation
+```
+pip install -r requirements.txt
+python pos_tag.py
+```
+
 
 # TODO
 neural word embedding
