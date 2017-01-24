@@ -1,17 +1,17 @@
+const path = require('path')
 const n = require('natural')
 
 const str = "Hmm, your computer seems to be *offline*. Blaa"
 const str2 = "so sending messages won’t work at the moment. Only visible to you"
 const exKudos = 'Thank you @joscha and @kevinmoilar for doing an awesome job on the foodways offer!'.split(' ')
 
-const lazyFox = 'Lys soldered the beautiful jewelery pieces'.split(' ')
-// Lazy fox jumped over some other thing
+const lazyFox = 'Lazy fox jumped over some other thing'.split(' ')
 
 const tokenizer = new n.WordTokenizer
 const tokenizer2 = new n.WordPunctTokenizer()
 const tokenizer3 = new n.TreebankWordTokenizer()
 const agresiveTokenizer = new n.AggressiveTokenizer()
-const splitSentences = new n.RegexpTokenizer({pattern: /[!?.]/ })
+const splitSentences = new n.RegexpTokenizer({ pattern: /[!?.]/ })
 
 tokenizer.tokenize(str)
 // [ 'Hmm', 'your', 'computer', 'seems', 'to', 'be', 'offline']
@@ -57,3 +57,53 @@ n.LevenshteinDistance('not', 'related')
 
 n.JaroWinklerDistance('cats', 'cat')
 // 0.9
+
+// very good
+// cuts to bigrams and compare
+n.DiceCoefficient('cats', 'cat')
+// 0.8 => similar
+
+n.DiceCoefficient('not', 'related')
+// 0 => not related
+
+const Tag = n.BrillPOSTagger
+const base = './node_modules/natural/lib/natural/brill_pos_tagger'
+// rules engine:
+// NNS CD CURRENT-WORD-IS-NUMBER YES
+const rule = base + '/data/English/tr_from_brill_paper.txt'
+const lexicon = base + '/data/English/lexicon_from_posjs.json'
+const category = 'N'
+
+// this api is stupid
+const tagAsync = (lexicon, rule, category) =>
+    new Promise((res, rej) => {
+        const tagger = new Tag(lexicon, rule, category,
+            err => err ? rej(err) : res(tagger))
+    })
+
+tagAsync(lexicon, rule, category)
+    .then(tag => console.log(tag.tag(exKudos)))
+    .catch(console.error)
+
+// VBN - verb
+// DT - determiner
+// JJ adjective
+// NNS - plural
+// NNP - noun, proper
+// NN - noun
+
+// [ [ 'Thank', 'VB' ],
+// [ 'you', 'PRP' ],
+// [ '@joscha', 'N' ],
+// [ 'and', 'CC' ],
+// [ '@kevinmoilar', 'N' ],
+// [ 'for', 'IN' ],
+// [ 'doing', 'VBG' ],
+// [ 'an', 'DT' ],
+// [ 'awesome', 'JJ' ],
+// [ 'job', 'NN' ],
+// [ 'on', 'IN' ],
+// [ 'the', 'DT' ],
+// [ 'foodways', 'N' ],
+// [ 'offer!', 'N' ] ]
+
