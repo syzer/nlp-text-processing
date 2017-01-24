@@ -37,4 +37,7 @@ bin/parseEnglishStopWords.js
 ```
 
 
+# TODO
+neural word embedding
+
 https://github.com/keithcollins/pi-bots/blob/master/bots/ascii_bot/app.js
