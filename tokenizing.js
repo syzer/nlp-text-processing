@@ -25,7 +25,7 @@ tokenizer3.tokenize(str)
 splitSentences.tokenize(str)
 // [ 'Hmm, your computer seems to be *offline*', ' Blaa' ]
 
-// avaible in Es/Rus/and so on
+// available in Es/Rus/and so on
 const porter = n.PorterStemmer
 const lancaster = n.LancasterStemmer
 porter.stem('salsas')
