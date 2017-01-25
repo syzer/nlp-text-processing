@@ -51,7 +51,7 @@ n.JaroWinklerDistance('cats', 'cat')
 n.JaroWinklerDistance('not', 'related')
 // 0.4920634920634921
 
-// how many to turn
+// how many to (edit|substititions|turn) to get other string
 n.LevenshteinDistance('not', 'related')
 // 6
 
@@ -59,6 +59,7 @@ n.JaroWinklerDistance('cats', 'cat')
 // 0.9
 
 // very good
+// split to ngrams.. same nagrams / total ngrams
 // cuts to bigrams and compare
 n.DiceCoefficient('cats', 'cat')
 // 0.8 => similar
@@ -108,18 +109,9 @@ tagAsync(lexicon, rule, category)
 // [ 'offer!', 'N' ] ]
 
 const train = [
-    {
-        label: 'spam',
-        text: 'We are currently verifying our subscribers email accounts in other to increase the efficiency of our webmail futures. During this course you are required to provide the verification desk with the following details so that your account could be verified;'
-    },
-    {
-        label: 'spam',
-        text: 'After the last annual calculations of your account activity we have determined that you are eligible to receive a tax refund of $479.30 .Please submit the tax refund request and allow us 2-6 days in order toprocess it.'
-    },
-    {
-        label: 'inbox',
-        text: '-tagger is trained on the Parole corpus, so the rules it uses to compute word classes for new words or homographs reflect the composition and usage in the Parole corpus (see report below). Under optimal circumstances the tagger attains 97% correct POS-tagging. '
-    }
+    { label: 'spam', text: 'We are currently verifying our subscribers email accounts in other to increase the efficiency of our webmail futures. During this course you are required to provide the verification desk with the following details so that your account could be verified;' },
+    { label: 'spam', text: 'After the last annual calculations of your account activity we have determined that you are eligible to receive a tax refund of $479.30 .Please submit the tax refund request and allow us 2-6 days in order toprocess it.' },
+    { label: 'inbox', text: '-tagger is trained on the Parole corpus, so the rules it uses to compute word classes for new words or homographs reflect the composition and usage in the Parole corpus (see report below). Under optimal circumstances the tagger attains 97% correct POS-tagging. ' }
 ]
 
 const test = [
@@ -127,14 +119,19 @@ const test = [
     { label: 'inbox', text: 'compute support vector machine' }
 ]
 
-const bayes = new n.BayesClassifier
+const lib = require('./lib/natural.async')
+const bayes = lib.newBayes()
 
 train.map(({ text, label }) =>
     bayes.addDocument(text, label))
 
 bayes.train()
 
+bayes.saveAsync('bayes.json')
+
 test.map(({ text }) => bayes.classify(text))
 
 // spam 0 [ 'spam', 'inbox' ]
 // inbox 1 [ 'spam', 'inbox' ]
+
+//////////////////////////////////////////////////////////////////////////////////
