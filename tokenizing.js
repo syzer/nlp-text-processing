@@ -109,29 +109,45 @@ tagAsync(lexicon, rule, category)
 // [ 'offer!', 'N' ] ]
 
 const train = [
-    { label: 'spam', text: 'We are currently verifying our subscribers email accounts in other to increase the efficiency of our webmail futures. During this course you are required to provide the verification desk with the following details so that your account could be verified;' },
-    { label: 'spam', text: 'After the last annual calculations of your account activity we have determined that you are eligible to receive a tax refund of $479.30 .Please submit the tax refund request and allow us 2-6 days in order toprocess it.' },
-    { label: 'inbox', text: '-tagger is trained on the Parole corpus, so the rules it uses to compute word classes for new words or homographs reflect the composition and usage in the Parole corpus (see report below). Under optimal circumstances the tagger attains 97% correct POS-tagging. ' }
+    {
+        label: 'spam',
+        text: 'We are currently verifying our subscribers email accounts in other to increase the efficiency of our webmail futures. During this course you are required to provide the verification desk with the following details so that your account could be verified;'
+    },
+    {
+        label: 'spam',
+        text: 'After the last annual calculations of your account activity we have determined that you are eligible to receive a tax refund of $479.30 .Please submit the tax refund request and allow us 2-6 days in order toprocess it.'
+    },
+    {
+        label: 'inbox',
+        text: '-tagger is trained on the Parole corpus, so the rules it uses to compute word classes for new words or homographs reflect the composition and usage in the Parole corpus (see report below). Under optimal circumstances the tagger attains 97% correct POS-tagging. '
+    }
 ]
 
 const test = [
     { label: 'spam', text: 'refund are requested' },
-    { label: 'inbox', text: 'compute support vector machine' }
+    { label: 'inbox', text: 'compute support vector machine' },
+    { label: 'inbox', text: 'refunds for viagra' }
 ]
 
 const lib = require('./lib/natural.async')
-const bayes = lib.newBayes()
+// const classifier = lib.newBayes()
+const classifier = lib.newLogisticRegressionClassifier()
 
 train.map(({ text, label }) =>
-    bayes.addDocument(text, label))
+    classifier.addDocument(text, label))
 
-bayes.train()
+classifier.train()
 
-bayes.saveAsync('bayes.json')
+classifier
+    .saveAsync('bayes.json')
+    .catch(console.error)
 
-test.map(({ text }) => bayes.classify(text))
+// TODO abstract away
+const accuracy = test
+        .map(({ label }) => label)
+        .filter((testLabel, i) =>
+            classifier.classify(test[i].text) === testLabel)
+        .length / test.length
 
-// spam 0 [ 'spam', 'inbox' ]
-// inbox 1 [ 'spam', 'inbox' ]
+console.log(`Prediction accuracy ${accuracy}`)
 
-//////////////////////////////////////////////////////////////////////////////////
