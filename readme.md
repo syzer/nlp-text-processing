@@ -44,6 +44,11 @@ python pos_tag.py
 
 
 # TODO
-neural word embedding
-
+ - [ ] neural word embedding
+ - [ ] dbrans-natural
+ - [ ] node-sentiwordnet
+    - https://github.com/kevincobain2000/node-sentiwordnet
+ - [?] wordnetify
 https://github.com/keithcollins/pi-bots/blob/master/bots/ascii_bot/app.js
+ - [ ] update sentiment
+    http://sentiwordnet.isti.cnr.it/
