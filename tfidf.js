@@ -11,7 +11,7 @@ const tfidf = lib.newTfidf()
 const phd2009 = require('./data/phd2009.acknowledgements.json')
 const scrapedArticle = require('./data/example.scraped.articles.json')
 
-const docs = concat(phd2009, scrapedArticle, [
+const docs = R.concat(R.concat(phd2009, scrapedArticle), [
     `Each approach has merits. It is usually cheaper (approach 1) to kill a superfluous feature at the requirements stage, before it has wasted implementation resources. This is also better for the morale of the team: developers get frustrated when something they imple- mented gets discarded; that form of waste is worse than tossing out a requirement before anything has been done with it. On the other hand, agilists are right that sometimes the best way (approach 2) to find out if something will be useful is to build it, show it, and see whether it fits.`,
     `Sometimes, but not always. The problem here is dogmatism. Upfront requirements are useful; iterative development is useful. Condemning either of these two complemen- tary techniques in the name of some absolutist ideology does not help projects, but actu- ally harms them.`,
     `The agile criticism is right on target when it lamba sts the huge requirements documents, sometimes running into the thousands of pages, that some bureaucratic environ- ments demand. While describing every single detail in advance is necessary for some life-critical systems (typically embedded systems, for example in transportation), for most business systems such documents are overkill; they become so complex that it is hard to get them right (contradictions and ambiguities creep in), and so unwieldy that they end up forgotten on a shelf rather than being used for the development.`,
@@ -23,19 +23,43 @@ docs.map(doc => tfidf.addDocument(doc))
 // const tf = 2
 // const idf = 1 + Math.log(10/(1 + howmanydocs have a word))
 
-tfidf.tfidfs('agile', console.log)
-tfidf.listTerms(2).map(console.log)
+tfidf.tfidfs('agile criticism', (i, stats) =>
+    console.log(`Doc ${i}, relevance: ${stats}`))
+
+// phd:
+// Doc 0, relevance: 18.88751059801299
+// agile criticism:
+// Doc 4, relevance: 3.386294361119891
+// Doc 5, relevance: 3.386294361119891
+
+
+// TODO filter out `so`
+const docsTopics = docs.map((doc,i) =>
+    tfidf.listTerms(i)
+        .splice(0, 3)
+        .map(R.props(['term', 'tfidf']))
+)
+console.log(docsTopics)
+// [ 'phd', 18.88751059801299 ]
+// [ 'thank', 18.88751059801299 ]
+// [ 'ian', 12.59167373200866 ]
+
+// lib.newEnTagAsync()
+//  .then(tag => docs.map((doc,i) =>
+//      tfidf.listTerms(i)
+//          .splice(0, 3)
+//          .map(R.props(['term', 'tfidf']))
+//          .map(e => ({
+             // pos: tag.tag(e[0]),
+             // name: e[0]
+         // }))))
+    // .catch(console.error)
 
 // tfidf
-//     .tfidfsAsync('deserves')
+//     .tfidfsAsync('agile')
 //     .then((stats, i) => {
 //         console.log(i, stats)
 //     })
-
-// TODO download
-
-// const wordnet = require('wordnet-db')
-// console.log(wordnet)
 
 const wordnet = lib.newWordNet()
 
@@ -43,5 +67,6 @@ const wordnet = lib.newWordNet()
 // http://wordnet.princeton.edu
 wordnet.lookupAsync('otter')
     .then(R.map(R.props(['ptrs', 'gloss', 'synonyms'])))
-    .then(console.log)
+    // .then(console.log)
+// 'freshwater carnivorous mammal having webbed and clawed feet and dark brown fur ',
 
