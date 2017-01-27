@@ -18,3 +18,14 @@ trie.contains('thanks')
 
 trie.findMatchesOnPath('collaboration')
 // [ '', 'co', 'coll' ]
+
+const t = new n.TreebankWordTokenizer()
+const spellCheck = new n.Spellcheck(t.tokenize(phdFile[0]))
+
+'I wuold like to thank'
+    .split(' ')
+    .map(e => spellCheck.getCorrections(e))
+    .map(R.slice(0, 1))
+    .join(' ')
+
+// I would like to thanks

@@ -130,8 +130,8 @@ const test = [
 ]
 
 const lib = require('./lib/natural.async')
-// const classifier = lib.newBayes()
-const classifier = lib.newLogisticRegressionClassifier()
+const classifier = lib.newBayes()
+// const classifier = lib.newLogisticRegressionClassifier()
 
 train.map(({ text, label }) =>
     classifier.addDocument(text, label))
@@ -142,6 +142,11 @@ classifier
     .saveAsync('bayes.json')
     .catch(console.error)
 
+classifier
+    .loadAsync('bayes.json', null)
+    .then(classifier => classifier.classify('Refund are requested for Nigerian prince'))
+// spam
+
 // TODO abstract away
 const accuracy = test
         .map(({ label }) => label)
@@ -149,5 +154,5 @@ const accuracy = test
             classifier.classify(test[i].text) === testLabel)
         .length / test.length
 
-console.log(`Prediction accuracy ${accuracy}`)
-
+// console.log(`Prediction accuracy ${accuracy}`)
+// ~85% accuracy

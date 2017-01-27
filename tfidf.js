@@ -30,7 +30,6 @@ tfidf.tfidfs('agile criticism', (i, stats) =>
 // Doc 4, relevance: 3.386294361119891
 // Doc 5, relevance: 3.386294361119891
 
-
 // TODO filter out `so`
 const docsTopics = docs.map((doc,i) =>
     tfidf.listTerms(i)
@@ -53,17 +52,12 @@ console.log(docsTopics)
          // }))))
     // .catch(console.error)
 
-// tfidf
-//     .tfidfsAsync('agile')
-//     .then((stats, i) => {
-//         console.log(i, stats)
-//     })
-
-const wordnet = lib.newWordNet()
-
 // http://sentiwordnet.isti.cnr.it/
 // http://wordnet.princeton.edu
-wordnet.lookupAsync('otter')
+const wordnet = lib.newWordNet()
+
+wordnet
+    .lookupAsync('otter')
     .then(R.map(R.props(['synsetOffset', 'pos', 'ptrs', 'gloss', 'synonyms'])))
     // .then(console.log)
 // 'freshwater carnivorous mammal having webbed and clawed feet and dark brown fur ',
