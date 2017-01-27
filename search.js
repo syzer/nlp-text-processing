@@ -27,5 +27,15 @@ const spellCheck = new n.Spellcheck(t.tokenize(phdFile[0]))
     .map(e => spellCheck.getCorrections(e))
     .map(R.slice(0, 1))
     .join(' ')
-
 // I would like to thanks
+
+
+// good algo
+const soundex = n.SoundEx
+const test = soundex.compare('hadoop', 'hadop')
+// true
+
+// easy algo
+const methaphone = n.Metaphone
+const test2 = methaphone.compare('hadoop', 'hadop')
+// true
