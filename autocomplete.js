@@ -1,12 +1,9 @@
 const n = require('natural')
 const fs = require('fs')
-const VPTree = require('mnemonist/vp-tree')
 const R = require('ramda')
+const VPTree = require('mnemonist/vp-tree')
+const words = require('word-list-google').twentyThousands
 const { map, find } = R
-
-const words = fs
-    .readFileSync(__dirname + '/google-10000-english/20k.txt', 'utf8')
-    .split('\n')
 
 const levenshtein = (a, b) => n.LevenshteinDistance(a, b)
 // JaroWinklerDistance dont work
