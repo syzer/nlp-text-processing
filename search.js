@@ -29,6 +29,23 @@ const spellCheck = new n.Spellcheck(t.tokenize(phdFile[0]))
     .join(' ')
 // I would like to thanks
 
+// Test on bigger data set
+// need to cleanup
+// TODO tc,tz => to
+const words = require('word-list-google')
+    .twentyThousands
+    .filter(w => !'ta,tb,tz,ta,tc,ct,n,z,o,a,p,d,q,f,r,t,n,z,o,a,p,d,q,f,r,l,y,m,b,s,e,h,x,w,v,u,k,j,g,c'.split(',')
+        .includes(w))
+// const spellCheck2 = new n.Spellcheck(t.tokenize(words.join(' ')))
+const spellCheck2 = new n.Spellcheck(words)
+
+const test3 = 'I wuold likes to thank'
+    .split(' ')
+    .map(e => spellCheck2.getCorrections(e))
+    .map(R.slice(0, 2))
+    .join('|')
+// i|would|liked,like|toc,toy|thanx,thanks
+
 
 // good algo
 const soundex = n.SoundEx
