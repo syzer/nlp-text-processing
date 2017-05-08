@@ -14,10 +14,10 @@ const tree = new VPTree(levenshtein, words)
 const correctWords = ['big', 'query', 'hadoop', 'lambda', 'calculus']
 
 // misspelled words
-    ;['bigg', 'quey', 'radop', 'lamba', 'calculs']
-    .map(e => tree.nearestNeighbors(4, e))
-    .map(map(({ item }) => item))
-    .filter(find(w => correctWords.includes(w)))
+;['bigg', 'quey', 'radop', 'lamba', 'calculs']
+  .map(e => tree.nearestNeighbors(4, e))
+  .map(map(({ item }) => item))
+  .filter(find(w => correctWords.includes(w)))
 
 // AKA autocomplete
 // all words found
