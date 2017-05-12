@@ -3,14 +3,13 @@
 // nodemon -w ./ -x 'cat ../data/karpathy.blog.post.txt | node extractTextMeaning3.js'
 const rake = require('node-rake')
 const fs = require('fs')
-// const str = fs.createReadStream('../data/karpathy.blog.post.txt', 'utf-8')
 const R = require('ramda')
 const { map: ostMap, streamToArray, arrayToStream } = require('object-stream-tools')
 const { map, filter, none, split, isEmpty, join, trim, replace } = R
 
 const parseFile = R.pipe(
   e => e.toString(),
-  split(/\n|\t/gi),
+  split(/[\n\t]/gi),
   filter(none(isEmpty)),
   map(trim),
   map(replace(/"/gi, '')),
