@@ -37,6 +37,8 @@
  */
 
 
+// https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance#Optimal_string_alignment_distance
+
 function DamerauLevenshteinDistance(source, target, options) {
     options = options || {};
     if (isNaN(options.insertion_cost)) options.insertion_cost = 1;
