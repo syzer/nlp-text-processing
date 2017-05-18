@@ -52,3 +52,4 @@ python pos_tag.py
 https://github.com/keithcollins/pi-bots/blob/master/bots/ascii_bot/app.js
  - [ ] update sentiment
     http://sentiwordnet.isti.cnr.it/
+ - [ ] test implantation of DamerauLevenshtein 
