@@ -21,6 +21,6 @@
     "object-stream-tools": "^2.3.0",
     "ramda": "^0.23.0",
     "word-list-google": "^1.0.0",
-    "wordnet-db": "^3.1.2"
+    "wordnet-db": "^3.1.4"
   }
 }
