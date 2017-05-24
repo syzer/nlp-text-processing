@@ -24,6 +24,6 @@ process.stdin
   .pipe(ostMap(parseFile))
   .pipe(streamToArray())
   .on('data', ([data]) =>
-    arrayToStream(rake.generate(data.slice(0, 5700)).slice(0, 5))
+    arrayToStream(rake.generate(data.slice(0, 5700)).slice(0, 6))
       .pipe(ostMap(e => e += '|'))
       .pipe(process.stdout))

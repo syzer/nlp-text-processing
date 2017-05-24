@@ -70,13 +70,16 @@ function DamerauLevenshteinDistance(source, target, options) {
                 costToSubstitute = costToSubstitute + options.substitution_cost;
             }
 
-            if (row > 1 && column > 1 ) {
+            // a[i] = b[j-1] and a[i-1] = b[j]
+            if (row > 1 && column > 1) {
                 distanceMatrix[row][column] = Math.min(
                     distanceMatrix[row][column],
                     distanceMatrix[row - 2][column - 2] + costToSubstitute // transposition
                 )
+                // console.log('<<', distanceMatrix[row][column])
             }
             distanceMatrix[row][column] = Math.min(costToInsert, costToDelete, costToSubstitute);
+            // console.log('>>', distanceMatrix[row][column])
         }
     }
     return distanceMatrix[sourceLength][targetLength];
