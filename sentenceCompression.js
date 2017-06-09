@@ -9,6 +9,6 @@ const sentenceToCompress = require('./data/sentenceToCompres.json')
 
 rake.generate(sentenceToCompress.text)
     .splice(0, 12).join('|')
-// metal rock humans | food Aliens | basically | insects
+// Metal rock humans | food Aliens | basically | insects
 
 // Turns out that rake is not so good for text compresion
