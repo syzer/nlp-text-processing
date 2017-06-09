@@ -1,4 +1,4 @@
-//@flow
+// @flow
 const n = require('natural')
 const R = require('ramda')
 const lib = require('./lib/natural.async')
@@ -14,7 +14,7 @@ trie.keysWithPrefix('tha')
 // [ 'that', 'thank', 'thanks' ]
 
 trie.contains('thanks')
-// true
+// True
 
 trie.findMatchesOnPath('collaboration')
 // [ '', 'co', 'coll' ]
@@ -36,7 +36,7 @@ const words = require('word-list-google')
     .twentyThousands
     .filter(w => !'ta,tb,tz,ta,tc,ct,n,z,o,a,p,d,q,f,r,t,n,z,o,a,p,d,q,f,r,l,y,m,b,s,e,h,x,w,v,u,k,j,g,c'.split(',')
         .includes(w))
-// const spellCheck2 = new n.Spellcheck(t.tokenize(words.join(' ')))
+// Const spellCheck2 = new n.Spellcheck(t.tokenize(words.join(' ')))
 const spellCheck2 = new n.Spellcheck(words)
 
 const test3 = 'I wuold likes to thank'
@@ -44,15 +44,14 @@ const test3 = 'I wuold likes to thank'
     .map(e => spellCheck2.getCorrections(e))
     .map(R.slice(0, 2))
     .join('|')
-// i|would|liked,like|toc,toy|thanx,thanks
-
+// I|would|liked,like|toc,toy|thanx,thanks
 
 // good algo
 const soundex = n.SoundEx
 const test = soundex.compare('hadoop', 'hadop')
-// true
+// True
 
 // easy algo
 const methaphone = n.Metaphone
 const test2 = methaphone.compare('hadoop', 'hadop')
-// true
+// True

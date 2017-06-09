@@ -6,7 +6,7 @@ const words = require('word-list-google').twentyThousands
 const { map, find } = R
 
 const levenshtein = (a, b) => n.LevenshteinDistance(a, b)
-// JaroWinklerDistance dont work
+// JaroWinklerDistance dont work, probably because tiangle equality is not full filed
 // const jaroWinkler = (a, b) => Number((Math.pow(1 / n.JaroWinklerDistance(a, b), 4)/8 - 0.9).toFixed(0))
 
 const tree = new VPTree(levenshtein, words)
