@@ -1,5 +1,7 @@
 # WAT
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/syzer/nlp-text-processing.svg)](https://greenkeeper.io/)
+
 nlp-processing sketchbook
 
 
