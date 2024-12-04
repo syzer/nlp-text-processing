@@ -18,7 +18,7 @@
     "lunr": "^2.0.4",
     "mnemonist": "^0.10.1",
     "natural": "^0.4.0",
-    "node-rake": "0.0.7",
+    "node-rake": "0.0.9",
     "object-stream-tools": "^2.3.0",
     "ramda": "^0.24.0",
     "word-list-google": "^1.0.0",
